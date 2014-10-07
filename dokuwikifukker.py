@@ -84,5 +84,6 @@ class DokuWikiFukker:
             edit_data['wikitext']=replace_function(edit_data['wikitext'])
         edit_data['do']='save'
         soup = self.__dw_soup__(edit_data)
-
+        # retrieve new page once
+        soup = self.__dw_soup__({ 'id' : page })
 
