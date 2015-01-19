@@ -53,7 +53,10 @@ class DokuWikiFukker:
     def login(self):
         soup = self.__dw_soup__({ 'do' : 'login' })
 
-        login_form_html=soup.find('form', "button btn_login")
+        login_form_html=soup.find('form', id="dw__login")
+        if not login_form_html:
+            # jar seems to exist and we are logged in.
+            return
         login_data={}
         for form_input in login_form_html.find_all('input'):
             if (form_input.has_attr('name') and form_input.has_attr('value')):
