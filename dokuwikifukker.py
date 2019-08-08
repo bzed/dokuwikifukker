@@ -24,7 +24,7 @@
 
 
 from bs4 import BeautifulSoup
-import urllib, urllib2, cookielib, tempfile, os
+import urllib.request, urllib.parse, urllib.error, urllib.request, urllib.error, urllib.parse, http.cookiejar, tempfile, os
 
 class DokuWikiFukker:
 
@@ -33,7 +33,7 @@ class DokuWikiFukker:
         self.jarfile = jarfile
         self.user = user
         self.password = password
-        self.jar = cookielib.LWPCookieJar(jarfile)
+        self.jar = http.cookiejar.LWPCookieJar(jarfile)
         try:
             self.jar.load()
         except IOError:
@@ -43,8 +43,8 @@ class DokuWikiFukker:
 
 
     def __dw_soup__(self, form_data):
-        opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(self.jar))
-        resp = opener.open(self.doku_php, urllib.urlencode(form_data))
+        opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(self.jar))
+        resp = opener.open(self.doku_php, urllib.parse.urlencode(form_data).encode("utf-8"))
         html_doc = resp.read()
         soup = BeautifulSoup(html_doc)
         return soup
