@@ -46,7 +46,7 @@ class DokuWikiFukker:
         opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(self.jar))
         resp = opener.open(self.doku_php, urllib.parse.urlencode(form_data).encode("utf-8"))
         html_doc = resp.read()
-        soup = BeautifulSoup(html_doc)
+        soup = BeautifulSoup(html_doc, features="lxml")
         return soup
 
 
