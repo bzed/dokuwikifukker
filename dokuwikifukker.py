@@ -81,7 +81,7 @@ class DokuWikiFukker:
                 continue
             if (form_input.has_attr('name') and form_input.has_attr('value')):
                 edit_data[form_input['name']]=form_input['value']
-        if content:
+        if content is not None:
             edit_data['wikitext']=content
         if replace_function:
             edit_data['wikitext']=replace_function(edit_data['wikitext'])
